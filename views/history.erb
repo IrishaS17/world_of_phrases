@@ -1,0 +1,34 @@
+<div class="history-area" style="margin-top: 200px;">
+	<%if @error then %>
+		<div class="alert alert-danger" style="color:red;"><%= @error %></div>
+</div>
+		<a  href="/" class="btn btn-block btn-default" > BACK </a>
+	<% else %>
+		<table class="table">
+			<% @size = @result.size %>
+			<% for i in 0..@size-1 %>
+			<tr>
+			    <td><%= @result[i][1] %> &nbsp;(
+				    <%= @result[i][2] %> ): "
+			        <% if i != 0 then %> 
+				        <% for x in 0..i-1 %>
+				              <%= @result[x][3] %>
+				        <% end %>
+			        <% end %>
+				    <strong><%= @result[i][3] %> "</strong>
+			    </td>
+			</tr>
+			<% end %>
+		</table>
+</div>
+    <% if @result[@size-1][0] == 1%>
+			<br>
+			<form  action="/add_word?id=<%= params['id']%>" method="post" role="form">
+				<input class="form-control" name = "word" required placeholder="Enter word" type="text">
+				<label><input type="checkbox" name = "continue"> Continue the phrase? </label>
+				<button class="btn btn-block btn-default" type="submit"> ADD </button>
+			</form>
+		<% else %>
+		  <a href="/" class="btn btn-block btn-default"> BACK </a>
+	  <% end %>
+  <% end %>
